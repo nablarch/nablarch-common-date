@@ -13,9 +13,8 @@ import java.util.Map;
 
 import nablarch.core.ThreadContext;
 import nablarch.core.message.MockStringResourceHolder;
+import nablarch.core.repository.ObjectLoader;
 import nablarch.core.repository.SystemRepository;
-import nablarch.core.repository.di.DiContainer;
-import nablarch.core.repository.di.config.xml.XmlComponentDefinitionLoader;
 import nablarch.core.validation.ValidationContext;
 import nablarch.core.validation.convertor.Digits;
 import nablarch.core.validation.convertor.TestTarget;
@@ -33,7 +32,7 @@ public class YYYYMMDDConvertorTest {
     private static YYYYMMDDConvertor convertor;
 
     /** モックストリングリソースホルダ */
-    private static MockStringResourceHolder resource;
+    private static MockStringResourceHolder resource = new MockStringResourceHolder();
 
     private static final String[][] MESSAGES = {
         {"PROP0001", "ja", "プロパティ1", "en", "property1"},
@@ -43,13 +42,15 @@ public class YYYYMMDDConvertorTest {
 
     @BeforeClass
     public static void setUpClass() {
-
-        XmlComponentDefinitionLoader loader = new XmlComponentDefinitionLoader(
-                "nablarch/common/date/yyyymmddconvertor-test-base.xml");
-        DiContainer container = new DiContainer(loader);
-        SystemRepository.load(container);
-
-        resource = container.getComponentByType(MockStringResourceHolder.class);
+        SystemRepository.clear();
+        SystemRepository.load(new ObjectLoader() {
+            @Override
+            public Map<String, Object> load() {
+                final Map<String, Object> result = new HashMap<String, Object>();
+                result.put("stringResourceHolder", resource);
+                return result;
+            }
+        });
         resource.setMessages(MESSAGES);
         convertor = new YYYYMMDDConvertor();
         convertor.setParseFailedMessageId("MSG00002");

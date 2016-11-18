@@ -19,9 +19,13 @@ apply plugin: 'com.nablarch.dev.nablarch-version'
 
 dependencies {
   compile "com.nablarch.framework:nablarch-core-validation:${nablarchCoreValidationVersion}"
+  testCompile 'junit:junit:4.12'
+  testCompile "com.nablarch.framework:nablarch-core-message:${nablarchCoreMessageVersion}"
+  testCompile "com.nablarch.framework:nablarch-core-repository:${nablarchCoreRepositoryVersion}"
+  testRuntime "com.nablarch.framework:nablarch-core-applog:${nablarchCoreApplogVersion}"
 }
 
 task wrapper(type: Wrapper) {
-  gradleVersion = '2.4'
+  gradleVersion = '2.13'
 }
 

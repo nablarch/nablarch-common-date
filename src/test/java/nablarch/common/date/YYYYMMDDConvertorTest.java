@@ -12,7 +12,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import nablarch.core.ThreadContext;
-import nablarch.core.message.MockStringResourceHolder;
+import nablarch.test.support.message.MockStringResourceHolder;
 import nablarch.core.repository.ObjectLoader;
 import nablarch.core.repository.SystemRepository;
 import nablarch.core.validation.ValidationContext;

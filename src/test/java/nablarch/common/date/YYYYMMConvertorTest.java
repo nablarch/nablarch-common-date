@@ -13,7 +13,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import nablarch.core.ThreadContext;
-import nablarch.core.message.MockStringResourceHolder;
+import nablarch.test.support.message.MockStringResourceHolder;
 import nablarch.core.repository.ObjectLoader;
 import nablarch.core.repository.SystemRepository;
 import nablarch.core.validation.ValidationContext;
@@ -122,7 +122,8 @@ public class YYYYMMConvertorTest {
 
         doTestConvert(context, annotation, new String[][]{
                 // ケース, 入力値, 期待値
-                {"ロケール指定", "Nov 2012", "201211"}
+                {"ロケール指定", "Nov 2012", "201211"},
+                {"ロケール指定かつ区切りなし", "Sep2011", "201109"}
         });
     }
 
@@ -169,7 +170,8 @@ public class YYYYMMConvertorTest {
     public void testIsConvertibleForI18N() {
         Map<String, String[]> params = new HashMap<String, String[]>();
         params.put("param", new String[]{"10"});
-        params.put("param_nablarch_formatSpec", new String[]{"yyyymm{yyyy-MM}"});
+        params.put("param_nablarch_formatSpec", new String[]{"yyyymm{yyyy-MM|jp}"});
+        params.put("param_nablarch_formatSpec_separator", new String[]{"|"});
         YYYYMM annotation = getYYYYMM("yyyy/MM");
         String[][] data = {
                 {"フォーマット通り", "2011-09"},

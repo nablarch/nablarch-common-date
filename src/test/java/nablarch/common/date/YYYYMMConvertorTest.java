@@ -208,6 +208,20 @@ public class YYYYMMConvertorTest {
         doTestIsConvertibleFail(data, annotation);
     }
 
+    /**
+     * 変換不可能なケース。
+     * numberOnlyFormatがnullのケース。
+     */
+    @Test
+    public void testIsConvertibleNumberOnlyFormatNull() {
+        Map<String, String[]> params = new HashMap<String, String[]>();
+        params.put("param", new String[]{"10"});
+        params.put("param_nablarch_formatSpec", new String[]{"yyyymm{yyyyMM|jp}"});
+        params.put("param_nablarch_formatSpec_separator", new String[]{"|"});
+        YYYYMM annotation = getYYYYMM("yyyy/MM");
+        assertFalse(convertor.isConvertible(createContext(params), "param", "PRPO001", "2011-09", annotation));
+    }
+
     /** {@link YYYYMMDDConvertor#isConvertible}のテスト */
     @Test
     public void testIsConvertibleSpecifiedMessage() {

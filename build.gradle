@@ -20,7 +20,7 @@ apply plugin: 'com.nablarch.dev.nablarch-version'
 dependencies {
   compile "com.nablarch.framework:nablarch-core-validation:${nablarchCoreValidationVersion}"
   testCompile 'junit:junit:4.12'
-  testCompile 'com.nablarch.dev:nablarch-test-support:0.0.5'
+  testCompile 'com.nablarch.dev:nablarch-test-support:0.0.7'
 }
 
 task wrapper(type: Wrapper) {

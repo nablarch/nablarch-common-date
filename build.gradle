@@ -17,10 +17,17 @@ apply plugin: 'com.nablarch.dev.nablarch-maven-deploy'
 apply plugin: 'com.nablarch.dev.nablarch-sonarqube'
 apply plugin: 'com.nablarch.dev.nablarch-version'
 
+configurations {
+  all*.exclude module: 'nablarch-test-support-hereis'
+  all*.exclude module: 'h2'
+  all*.exclude module: 'commons-dbcp'
+  all*.exclude module: 'eclipselink'
+  all*.exclude module: 'jsp-api-2.1-glassfish'
+}
+
 dependencies {
   compile "com.nablarch.framework:nablarch-core-validation:${nablarchCoreValidationVersion}"
   testCompile 'junit:junit:4.12'
-  testCompile 'com.nablarch.dev:nablarch-test-support:0.0.7'
 }
 
 task wrapper(type: Wrapper) {
